@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "AGENT_HOOKS_PYTHON": "C:/Users/Q/.claude/hooks/.venv/Scripts/python.exe",
+    "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "1000000",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(make:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(ls:*)",
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(lsof:*)",
+      "Bash(mkdir:*)",
+      "WebSearch",
+      "Bash(git add:*)",
+      "Bash(xargs:*)",
+      "Bash(while read f)",
+      "Bash(fi:*)",
+      "Bash(done:*)",
+      "Bash(for:*)",
+      "Bash(pkill:*)"
+    ],
+    "deny": [
+      "Bash(git stash:*)",
+      "Bash(git stash pop:*)",
+      "Bash(git commit:*)",
+      "Read(./secrets/**)"
+    ],
+    "ask": [
+    ],
+    "defaultMode": "plan"
+  },
+  "model": "opus",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-head-read.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-head-tail-pipe.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-bg-head-tail-pipe.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-heredoc.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-cat-write.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-background-ampersand.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-sed-print.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-git-amend.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-destructive-git.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-devnull-redirect.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-dangerous-ops.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-worktree-team.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/explore-model-sonnet.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-bg-unbuffered-python.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-pip-npm.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-multi-question.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-agent-claude-code-guide.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-skill-babysit.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-skill-agent-browser.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/no-bare-python.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-python-unbuffered.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-auto-bg-head-tail-pipe.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-explore-results.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-pep723-script.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-websearch-followup.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell|Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/hint-fork-on-bloat.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/track-babysit-skill-load.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "SendUserFile",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/track-sent-file.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/prefer-rg.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/prefer-fd.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/prefer-just.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/prefer-eza.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/prefer-tvly.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/inject-git-status.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/inject-system-load.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/block-note-prompt.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "auto|manual",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "uv run ~/.claude/hooks/compact-bump.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [],
+    "Notification": [],
+    "PermissionRequest": [],
+    "PostToolUseFailure": [],
+    "Stop": [],
+    "StopFailure": [],
+    "SessionEnd": []
+  },
+  "defaultShell": "powershell",
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
+    "superpowers-lab@superpowers-marketplace": true,
+    "double-shot-latte@superpowers-marketplace": true,
+    "code-review@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "shuorenhua@shuorenhua": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "shuorenhua": {
+      "source": {
+        "source": "github",
+        "repo": "MrGeDiao/shuorenhua"
+      }
+    }
+  },
+  "language": "chinese",
+  "modelSettings": {
+    "glm-5.3": {
+      "effortLevel": "high"
+    }
+  },
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true
+}
