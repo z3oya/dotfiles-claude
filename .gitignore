@@ -14,6 +14,7 @@ shell-snapshots/
 tasks/
 teams/
 telemetry/
+double-shot-latte/
 
 .last-cleanup
 .last-update-result.json
