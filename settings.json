@@ -51,9 +51,13 @@
     ],
     "ask": [
     ],
-    "defaultMode": "plan"
+    "defaultMode": "plan",
+    "additionalDirectories": [
+      "~/tmp",
+      "~/test"
+    ]
   },
-  "model": "opus",
+  
   "hooks": {
     "PreToolUse": [
       {
@@ -488,12 +492,37 @@
       }
     }
   },
-  "language": "chinese",
+  "skillOverrides": {
+    "init": "user-invocable-only",
+    "security-review": "user-invocable-only",
+    "fewer-permission-prompts": "user-invocable-only",
+    "claude-api": "user-invocable-only",
+    "keybindings-help": "user-invocable-only",
+    "schedule": "user-invocable-only",
+    "design": "user-invocable-only",
+    "morning": "user-invocable-only",
+    "import-memory": "user-invocable-only"
+  },
+  "worktree": {
+    "baseRef": "head"
+  },
+  "attribution": {
+    "commit": "",
+    "sessionUrl": false,
+    "pr": ""
+  },
   "modelSettings": {
     "glm-5.3": {
       "effortLevel": "high"
     }
   },
+  "language": "chinese",
+  "model": "opus",
   "tui": "fullscreen",
+  "subagentPromptCacheTtl": "5m",
+  "autoMemoryEnabled": true,
+  "autoDreamEnabled": true,
+  "autoScrollEnabled": true,
+  "fileCheckpointingEnabled": true,
   "skipWorkflowUsageWarning": true
 }
