@@ -16,6 +16,11 @@
     "DISABLE_AUTOUPDATER": "1",
     "IS_DEMO": "1"
   },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "permissions": {
     "allow": [
       "Edit(*)",
@@ -49,15 +54,25 @@
       "Bash(git commit:*)",
       "Read(./secrets/**)"
     ],
-    "ask": [
-    ],
+    "ask": [],
     "defaultMode": "plan",
     "additionalDirectories": [
       "~/tmp",
       "~/test"
     ]
   },
-  
+  "model": "opus",
+  "skillOverrides": {
+    "init": "user-invocable-only",
+    "security-review": "user-invocable-only",
+    "fewer-permission-prompts": "user-invocable-only",
+    "claude-api": "user-invocable-only",
+    "keybindings-help": "user-invocable-only",
+    "schedule": "user-invocable-only",
+    "design": "user-invocable-only",
+    "morning": "user-invocable-only",
+    "import-memory": "user-invocable-only"
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -65,8 +80,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-head-read.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -76,8 +91,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-head-tail-pipe.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -87,8 +102,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-bg-head-tail-pipe.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -98,8 +113,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-heredoc.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -109,8 +124,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-cat-write.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -120,8 +135,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-background-ampersand.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -131,8 +146,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-sed-print.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -142,8 +157,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-git-amend.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -153,8 +168,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-destructive-git.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -164,8 +179,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-devnull-redirect.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -175,8 +190,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-dangerous-ops.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -186,8 +201,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-worktree-team.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -197,8 +212,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/explore-model-sonnet.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -208,8 +223,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-bg-unbuffered-python.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -219,8 +234,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-pip-npm.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -230,8 +245,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-multi-question.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -241,8 +256,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-agent-claude-code-guide.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -252,8 +267,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-skill-babysit.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -263,8 +278,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-skill-agent-browser.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -274,8 +289,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-bare-python.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -285,8 +300,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/no-global-npx-skills.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -298,8 +313,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-python-unbuffered.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -309,8 +324,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-auto-bg-head-tail-pipe.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -320,8 +335,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-explore-results.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -331,8 +346,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-pep723-script.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -342,8 +357,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-websearch-followup.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -353,8 +368,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/hint-fork-on-bloat.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -364,8 +379,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/track-babysit-skill-load.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -375,8 +390,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/track-sent-file.py",
+            "shell": "bash",
             "timeout": 10
           }
         ]
@@ -386,8 +401,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/prefer-rg.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -397,8 +412,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/prefer-fd.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -408,8 +423,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/prefer-just.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -419,8 +434,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/prefer-eza.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -430,8 +445,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/prefer-tvly.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -442,20 +457,20 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/inject-git-status.py",
+            "shell": "bash",
             "timeout": 5
           },
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/inject-system-load.py",
+            "shell": "bash",
             "timeout": 5
           },
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/block-note-prompt.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -467,8 +482,8 @@
         "hooks": [
           {
             "type": "command",
-            "shell": "bash",
             "command": "uv run ~/.claude/hooks/compact-bump.py",
+            "shell": "bash",
             "timeout": 5
           }
         ]
@@ -482,18 +497,15 @@
     "StopFailure": [],
     "SessionEnd": []
   },
+  "worktree": {
+    "baseRef": "head"
+  },
   "defaultShell": "powershell",
   "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true,
-    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
-    "superpowers-lab@superpowers-marketplace": true,
-    "double-shot-latte@superpowers-marketplace": true,
     "code-review@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "shuorenhua@shuorenhua": true,
-    "frontend-design@claude-plugins-official": true
+    "shuorenhua@shuorenhua": true
   },
   "extraKnownMarketplaces": {
     "shuorenhua": {
@@ -503,37 +515,17 @@
       }
     }
   },
-  "skillOverrides": {
-    "init": "user-invocable-only",
-    "security-review": "user-invocable-only",
-    "fewer-permission-prompts": "user-invocable-only",
-    "claude-api": "user-invocable-only",
-    "keybindings-help": "user-invocable-only",
-    "schedule": "user-invocable-only",
-    "design": "user-invocable-only",
-    "morning": "user-invocable-only",
-    "import-memory": "user-invocable-only"
-  },
-  "worktree": {
-    "baseRef": "head"
-  },
-  "attribution": {
-    "commit": "",
-    "sessionUrl": false,
-    "pr": ""
-  },
+  "language": "chinese",
+  "subagentPromptCacheTtl": "5m",
   "modelSettings": {
     "glm-5.3": {
       "effortLevel": "high"
     }
   },
-  "language": "chinese",
-  "model": "opus",
   "tui": "fullscreen",
-  "subagentPromptCacheTtl": "5m",
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
+  "skipWorkflowUsageWarning": true,
   "autoScrollEnabled": true,
-  "fileCheckpointingEnabled": true,
-  "skipWorkflowUsageWarning": true
+  "fileCheckpointingEnabled": true
 }
