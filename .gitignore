@@ -13,6 +13,8 @@ session-env/
 shell-snapshots/
 tasks/
 teams/
+jobs/
+daemon/
 telemetry/
 double-shot-latte/
 tmp-origin/
@@ -20,8 +22,10 @@ tmp-origin/
 .last-cleanup
 .last-update-result.json
 history.jsonl
-settings.json.*
 stats-cache.json
+settings.json.*
+daemon.*
 
 **/__pycache__/
 *.local.json
+
