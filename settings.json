@@ -302,7 +302,7 @@
             "type": "command",
             "command": "uv run ~/.claude/hooks/no-global-npx-skills.py",
             "shell": "bash",
-            "timeout": 5
+            "timeout": 10
           }
         ]
       }
