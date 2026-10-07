@@ -51,7 +51,7 @@ CLAUDE_AGENT_DESCRIPTION = "Audit with a fresh eye."
 CLAUDE_AGENT_TOOLS = [
     "Read", "Grep", "Glob", "WebFetch", "WebSearch",
     "Agent(Explore, claude-code-guide)",
-    "Bash(exa:*)", "Bash(file:*)", "Bash(which:*)", "Bash(command -v:*)",
+    "Bash(eza:*)", "Bash(file:*)", "Bash(which:*)", "Bash(command -v:*)",
     "Bash(type:*)", "Bash(fd:*)", "Bash(jq:*)",
     "Bash(* --help)", "Bash(* --help *)",
 ]
