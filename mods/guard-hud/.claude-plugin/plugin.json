@@ -1,0 +1,7 @@
+{
+  "name": "guard-hud",
+  "version": "0.1.0",
+  "description": "Band + pane surfacing this session's tool-call and guard-deny activity",
+  "author": { "name": "z3oya" },
+  "types": "./types/index.d.ts"
+}

@@ -29,3 +29,5 @@ daemon.*
 **/__pycache__/
 *.local.json
 
+dev-mods/
+

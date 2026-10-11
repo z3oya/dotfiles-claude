@@ -539,13 +539,20 @@
     "code-review@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "shuorenhua@shuorenhua": true
+    "shuorenhua@shuorenhua": true,
+    "guard-hud@guard-hud": true
   },
   "extraKnownMarketplaces": {
     "shuorenhua": {
       "source": {
         "source": "github",
         "repo": "MrGeDiao/shuorenhua"
+      }
+    },
+    "guard-hud": {
+      "source": {
+        "source": "directory",
+        "path": "~/.claude/mods/guard-hud"
       }
     }
   },

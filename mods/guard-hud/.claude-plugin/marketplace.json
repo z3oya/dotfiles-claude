@@ -1,0 +1,6 @@
+{
+  "name": "guard-hud",
+  "description": "Mods marketplace: guard-hud, a band + pane surfacing tool-call and guard-block activity",
+  "owner": { "name": "z3oya" },
+  "plugins": [{ "name": "guard-hud", "source": "./" }]
+}
