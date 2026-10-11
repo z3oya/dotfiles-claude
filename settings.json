@@ -540,7 +540,8 @@
     "feature-dev@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "shuorenhua@shuorenhua": true,
-    "guard-hud@guard-hud": true
+    "guard-hud@guard-hud": true,
+    "zai-quota@zai-quota": true
   },
   "extraKnownMarketplaces": {
     "shuorenhua": {
@@ -553,6 +554,12 @@
       "source": {
         "source": "directory",
         "path": "~/.claude/mods/guard-hud"
+      }
+    },
+    "zai-quota": {
+      "source": {
+        "source": "directory",
+        "path": "~/.claude/mods/zai-quota"
       }
     }
   },

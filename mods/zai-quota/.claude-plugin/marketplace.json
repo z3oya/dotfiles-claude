@@ -1,0 +1,6 @@
+{
+  "name": "zai-quota",
+  "description": "Mods marketplace: zai-quota, a pinned status line for GLM Coding Plan quota",
+  "owner": { "name": "z3oya" },
+  "plugins": [{ "name": "zai-quota", "source": "./" }]
+}
