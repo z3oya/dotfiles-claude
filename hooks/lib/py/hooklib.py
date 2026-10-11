@@ -128,6 +128,16 @@ def emit_pre_tool_deny_bypassable(marker: str, reason: str, tool_name: str | Non
     )
 
 
+def emit_pre_tool_ask(reason: str) -> None:
+    print(json.dumps({
+        "hookSpecificOutput": {
+            "hookEventName": "PreToolUse",
+            "permissionDecision": "ask",
+            "permissionDecisionReason": reason,
+        }
+    }, separators=(",", ":")))
+
+
 def emit_pre_tool_warn(hint: str) -> None:
     print(json.dumps({
         "hookSpecificOutput": {"hookEventName": "PreToolUse", "additionalContext": hint}

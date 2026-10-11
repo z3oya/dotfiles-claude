@@ -18,7 +18,8 @@
     "IS_DEMO": "1",
     "USER_HOOKS_PREFER_TVLY": "1",
     "USER_HOOKS_HINT_GIT_COMMIT_RULES": "1",
-    "USER_HOOKS_HINT_GIT_TAG_CHANGELOG": "1"
+    "USER_HOOKS_HINT_GIT_TAG_CHANGELOG": "1",
+    "USER_HOOKS_ASK_GIT_COMMIT": "1"
   },
   "attribution": {
     "commit": "",
@@ -56,7 +57,10 @@
       "Bash(git stash:*)",
       "Bash(git stash pop:*)"
     ],
-    "ask": [],
+    "ask": [
+      "Bash(git commit:*)",
+      "PowerShell(git commit:*)"
+    ],
     "defaultMode": "plan",
     "additionalDirectories": [
       "~/tmp",
@@ -314,6 +318,12 @@
           {
             "type": "command",
             "command": "uv run ~/.claude/hooks/hint-git-commit-rules.py",
+            "shell": "bash",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "uv run ~/.claude/hooks/ask-git-commit.py",
             "shell": "bash",
             "timeout": 5
           }
