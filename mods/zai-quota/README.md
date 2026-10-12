@@ -50,4 +50,6 @@ git clone https://github.com/z3oya/zai-quota
 claude --plugin-dir zai-quota
 ```
 
+`.env.example` lists the environment variables it reads.
+
 Tests run against the engine itself: `claude plugin test zai-quota`.
