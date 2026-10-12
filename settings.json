@@ -540,7 +540,7 @@
     "feature-dev@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "shuorenhua@shuorenhua": true,
-    "guard-hud@guard-hud": true,
+    "guard-hud@guard-hud": false,
     "zai-quota@zai-quota": true
   },
   "extraKnownMarketplaces": {
@@ -570,11 +570,13 @@
       "effortLevel": "high"
     }
   },
+  "askUserQuestionTimeout": "10m",
   "tui": "fullscreen",
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
   "skipWorkflowUsageWarning": true,
   "verbose": false,
   "autoScrollEnabled": true,
-  "fileCheckpointingEnabled": true
+  "fileCheckpointingEnabled": true,
+  "useAutoModeDuringPlan": false
 }
