@@ -28,7 +28,7 @@ Goal: readable history, machine-parseable types, stable semver signals.
 - Wrap manually at 72 columns (git never wraps automatically)
 - Explain what and why, not how (the how is in the diff)
 - Suggested order: problem background → the change → rationale / side effects
-- `-` bullet lists allowed; omit the body when one sentence suffices
+- body uses `-` bullet items; omit the body when one sentence suffices
 
 ## 4. Footer
 
@@ -69,9 +69,10 @@ feat(parser): support nested glob patterns
 ```
 fix: prevent racing of requests
 
-Introduce a request id and an index table to track outstanding
-requests. Old behavior: responses could arrive out of order and
-overwrite newer data.
+- Introduce a request id and an index table to track outstanding
+  requests
+- Old behavior: responses could arrive out of order and overwrite
+  newer data
 
 BREAKING CHANGE: environment variable `REQUEST_MODE` removed.
 Use `concurrency.mode` in config instead.
@@ -84,6 +85,6 @@ Counterexamples: `fixed parser bug` (past tense) / `update files` (zero informat
 
 1. subject ≤50 display columns (≈25 hanzi, 72 the hard limit), imperative, no trailing punctuation?
 2. blank line between sections?
-3. body explains what and why only?
+3. body explains what and why only, using `-` bullet items?
 4. type, scope, and `!` breaking marker correct?
 5. issue / SHA references in the footer?

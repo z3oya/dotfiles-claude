@@ -30,7 +30,7 @@
 - 72 列手动换行（git 不自动换行）
 - 写 what 与 why，不写 how（how 在 diff 里）
 - 顺序建议：问题背景 → 变更内容 → 选择理由 / 副作用
-- 可用 `-` 列表；一句话能说清则省略 body
+- body 使用 `-` 列项书写；一句话能说清则省略 body
 
 ## 4. Footer
 
@@ -71,9 +71,10 @@ feat(parser): support nested glob patterns
 ```
 fix: prevent racing of requests
 
-Introduce a request id and an index table to track outstanding
-requests. Old behavior: responses could arrive out of order and
-overwrite newer data.
+- Introduce a request id and an index table to track outstanding
+  requests
+- Old behavior: responses could arrive out of order and overwrite
+  newer data
 
 BREAKING CHANGE: environment variable `REQUEST_MODE` removed.
 Use `concurrency.mode` in config instead.
@@ -86,6 +87,6 @@ Refs: #345
 
 1. subject ≤50 显示列（≈25 汉字，72 硬上限）、祈使语气、无句号？
 2. 段间空行齐全？
-3. body 只讲 what 与 why？
+3. body 只讲 what 与 why，且使用 `-` 列项？
 4. 类型、scope、`!` 破坏性标记正确？
 5. issue / SHA 引用放在 footer？
