@@ -1,6 +1,6 @@
 {
   "name": "zai-quota",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Pinned status line: GLM Coding Plan quota (5h / weekly / MCP), refreshed every 3 minutes",
   "author": { "name": "z3oya" }
 }
