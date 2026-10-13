@@ -1,9 +1,8 @@
 import type { EngineInterface, Register } from 'claude-code'
 
 import { decide, keyTagOf, validateCache, validateLease, type CacheEntry } from './cache'
-import { fmtStatus, parseQuota } from './quota'
+import { fmtStatus, hostOf, parseQuota } from './quota'
 
-const DEFAULT_HOST = 'https://open.bigmodel.cn'
 const QUOTA_PATH = '/api/monitor/usage/quota/limit'
 const INTERVAL_MS = 180_000
 // The window is 3/4 of the tick period: fetchedAt lands mid-tick (jitter +
@@ -17,11 +16,6 @@ const LEASE_MS = 35_000
 let lastGood: string | null = null
 let inFlight = false
 const me = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`
-
-async function resolveHost($: EngineInterface): Promise<string> {
-  const base = await $.env.get('ANTHROPIC_BASE_URL')
-  return base && base.includes('z.ai') ? 'https://api.z.ai' : DEFAULT_HOST
-}
 
 async function resolveKey($: EngineInterface): Promise<string | null> {
   return (
@@ -79,12 +73,18 @@ async function tick($: EngineInterface): Promise<void> {
   inFlight = true
   let claimed = false
   try {
+    // A non-GLM relay means the key is not speaking to GLM: idle and clear.
+    const host = hostOf(await $.env.get('ANTHROPIC_BASE_URL'))
+    if (!host) {
+      lastGood = null
+      $.ui.status(undefined)
+      return
+    }
     const key = await resolveKey($)
     if (!key) {
       if (!lastGood) $.ui.status('zai-quota: no API key (ANTHROPIC_AUTH_TOKEN / ZAI_API_KEY)')
       return
     }
-    const host = await resolveHost($)
     const keyTag = keyTagOf(key)
     const show = (c: CacheEntry | null) =>
       c && c.host === host && c.keyTag === keyTag ? c.status : null

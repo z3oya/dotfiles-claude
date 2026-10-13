@@ -1,9 +1,9 @@
 # zai-quota
 
 A Claude Code mod that pins GLM Coding Plan quota into the status line: the
-plan name plus the 5-hour, weekly and MCP windows, refreshed every 3 minutes.
+5-hour, weekly and MCP windows, refreshed every 3 minutes.
 
-- **Status line** — `GLM coding-plan Pro | 5h 17% | wk 42% | MCP 30/1000`
+- **Status line** — `5h 17% | wk 42% | MCP 30/1000`
 - **3-minute refresh** — one request per window across every running
   instance, timed out at 15 s; jitter and a short lease elect who fetches,
   the rest display the cache
@@ -37,10 +37,9 @@ once the first good reading lands.
   `ZAI_API_KEY`, `BIGMODEL_API_KEY` or `ZHIPU_API_KEY`); team keys without
   org headers get empty data.
 - Host follows `ANTHROPIC_BASE_URL`: a URL containing `z.ai` queries
-  `api.z.ai`, anything else `open.bigmodel.cn`. Raw-key auth first, retried
-  with `Bearer` on 401.
-- Status text is sanitized to single-width characters; CJK plan names show
-  as `?` there.
+  `api.z.ai`, one containing `bigmodel.cn` (or no base URL at all)
+  `open.bigmodel.cn`. Any other base URL and the mod idles: no requests, its
+  status line cleared. Raw-key auth first, retried with `Bearer` on 401.
 - `disableAllHooks`, `--safe-mode` and `--bare` also stop this mod.
 
 ## Development

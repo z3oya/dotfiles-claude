@@ -9,26 +9,28 @@ export type Limit = {
 }
 
 export type QuotaSummary = {
-  plan: string
   five: Limit | null
   week: Limit | null
   mcp: Limit | null
 }
 
-const ascii = (s: string) => s.replace(/[^\x20-\x7E]/g, '?')
+// The mod only speaks to GLM endpoints: an unset base keeps the bigmodel
+// default, any other relay opts the mod out (null).
+export const BIGMODEL_HOST = 'https://open.bigmodel.cn'
+export const ZAI_HOST = 'https://api.z.ai'
+
+export function hostOf(base: string | null | undefined): string | null {
+  if (!base) return BIGMODEL_HOST
+  if (base.includes('z.ai')) return ZAI_HOST
+  if (base.includes('bigmodel.cn')) return BIGMODEL_HOST
+  return null
+}
 
 const toNum = (v: unknown): number =>
   typeof v === 'number' ? v : typeof v === 'string' && /^\d+$/.test(v) ? Number(v) : NaN
 
-function planName(data: Record<string, unknown>): string {
-  for (const f of ['planName', 'plan', 'plan_type', 'packageName', 'level'] as const) {
-    const v = data[f]
-    if (v) return String(v)
-  }
-  return 'unknown'
-}
-
-// null: 200 but nothing usable (bad body, or team key without org headers).
+// null: 200 but nothing usable (bad body, a team key without org headers, or
+// no limit type we display).
 export function parseQuota(body: string): QuotaSummary | null {
   let payload: unknown
   try {
@@ -58,8 +60,9 @@ export function parseQuota(body: string): QuotaSummary | null {
     if (!week) week = rest.shift() ?? null
   }
   const mcp = limits.find(l => l.type === 'TIME_LIMIT') ?? null
+  if (windows.length === 0 && !mcp) return null
 
-  return { plan: ascii(planName(data)), five, week, mcp }
+  return { five, week, mcp }
 }
 
 const pct = (l: Limit | null) =>
@@ -73,10 +76,7 @@ const hourLabel = (l: Limit) => {
 
 export function fmtStatus(q: QuotaSummary | null): string {
   if (!q) return 'zai-quota: empty data (personal key needed)'
-  const label = /^GLM/i.test(q.plan)
-    ? q.plan.replace(/^GLM\s+(?:coding\s+plan\s+)?/i, 'GLM coding-plan ')
-    : `GLM ${q.plan}`
-  const parts = [label]
+  const parts: string[] = []
   if (q.five) parts.push(`${hourLabel(q.five)} ${pct(q.five)}`)
   if (q.week) parts.push(`wk ${pct(q.week)}`)
   if (q.mcp) {

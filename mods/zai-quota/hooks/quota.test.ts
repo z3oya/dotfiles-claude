@@ -1,6 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 
-import { fmtStatus, parseQuota } from './quota'
+import { fmtStatus, hostOf, parseQuota } from './quota'
 
 // Windows map by unit (3 → 5h, 6 → week); fixture interleaves reset and wire order.
 const SAMPLE = JSON.stringify({
@@ -14,7 +14,7 @@ const SAMPLE = JSON.stringify({
   },
 })
 
-// Verbatim API body captured 2026-10-13 (plan comes from `level`).
+// Verbatim API body captured 2026-10-13; planName/level ride along and are ignored.
 const REAL = JSON.stringify({
   code: 200,
   msg: '操作成功',
@@ -32,14 +32,13 @@ const REAL = JSON.stringify({
 test('parse maps windows by unit regardless of reset and wire order', () => {
   const q = parseQuota(SAMPLE)
   expect(q).not.toBe(null)
-  expect(q!.plan).toBe('GLM Coding Plan Pro')
   expect(q!.five?.percentage).toBe(1)
   expect(q!.week?.percentage).toBe(81)
   expect(q!.mcp?.currentValue).toBe(1001)
 })
 
 test('real API body with level field maps correctly', () => {
-  expect(fmtStatus(parseQuota(REAL))).toBe('GLM pro | 5h 1% | wk 81% | MCP 1001/1000')
+  expect(fmtStatus(parseQuota(REAL))).toBe('5h 1% | wk 81% | MCP 1001/1000')
 })
 
 test('empty data parses to null', () => {
@@ -48,15 +47,27 @@ test('empty data parses to null', () => {
   expect(parseQuota('{}')).toBe(null)
 })
 
+test('limits with only unknown types parse to null', () => {
+  expect(parseQuota(JSON.stringify({ data: { limits: [{ type: 'FOO', percentage: 5 }] } }))).toBe(null)
+})
+
+test('hostOf routes GLM base URLs and opts out elsewhere', () => {
+  expect(hostOf(undefined)).toBe('https://open.bigmodel.cn')
+  expect(hostOf('https://open.bigmodel.cn/api/anthropic')).toBe('https://open.bigmodel.cn')
+  expect(hostOf('https://api.z.ai/api/anthropic')).toBe('https://api.z.ai')
+  expect(hostOf('https://api.anthropic.com')).toBe(null)
+  expect(hostOf('https://relay.example.com')).toBe(null)
+})
+
 test('mcp without counts falls back to percentage', () => {
   const q = parseQuota(JSON.stringify({
     data: { planName: 'Lite', limits: [{ type: 'TIME_LIMIT', percentage: 3 }] },
   }))
-  expect(fmtStatus(q)).toBe('GLM Lite | MCP 3%')
+  expect(fmtStatus(q)).toBe('MCP 3%')
 })
 
-test('status line is single-width and sections join', () => {
-  expect(fmtStatus(parseQuota(SAMPLE))).toBe('GLM coding-plan Pro | 5h 1% | wk 81% | MCP 1001/1000')
+test('status line sections join', () => {
+  expect(fmtStatus(parseQuota(SAMPLE))).toBe('5h 1% | wk 81% | MCP 1001/1000')
 })
 
 test('non-object limit entries are ignored', () => {
@@ -119,7 +130,7 @@ test('string unit and number are coerced', () => {
     },
   }))
   expect(q!.five?.percentage).toBe(7)
-  expect(fmtStatus(q)).toBe('GLM Pro | 5h 7% | wk 9%')
+  expect(fmtStatus(q)).toBe('5h 7% | wk 9%')
 })
 
 test('hour label reflects window size', () => {
@@ -129,15 +140,5 @@ test('hour label reflects window size', () => {
       limits: [{ type: 'TOKENS_LIMIT', unit: 3, number: 8, percentage: 10 }],
     },
   }))
-  expect(fmtStatus(q)).toBe('GLM Pro | 8h 10%')
-})
-
-test('cjk plan name is sanitized', () => {
-  const q = parseQuota(JSON.stringify({
-    data: {
-      planName: '套餐Pro',
-      limits: [{ type: 'TOKENS_LIMIT', unit: 3, number: 5, percentage: 1 }],
-    },
-  }))
-  expect(fmtStatus(q)).toBe('GLM ??Pro | 5h 1%')
+  expect(fmtStatus(q)).toBe('8h 10%')
 })
