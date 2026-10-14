@@ -7,7 +7,7 @@ file-history/
 backups/
 cache/
 debug/
-scripts/
+/scripts/
 sessions/
 session-env/
 shell-snapshots/
