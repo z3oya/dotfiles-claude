@@ -523,13 +523,12 @@
         ]
       }
     ],
-    "SessionStart": [],
+    "SessionEnd": [],
     "Notification": [],
     "PermissionRequest": [],
     "PostToolUseFailure": [],
     "Stop": [],
-    "StopFailure": [],
-    "SessionEnd": []
+    "StopFailure": []
   },
   "worktree": {
     "baseRef": "head"
