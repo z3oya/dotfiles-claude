@@ -31,7 +31,7 @@ try:
 except (OSError, ValueError):
     gen = 0
 # Atomic tmp+rename: a torn gen file would be read as 0 by consumers and
-# silently skip one re-arm (self-heals next bump, but free to prevent).
+# skip one re-arm (self-heals next bump, but free to prevent).
 tmp = f.with_name(f"{sid}.gen.tmp.{os.getpid()}")
 tmp.write_text(str(gen + 1), encoding="utf-8")
 os.replace(tmp, f)

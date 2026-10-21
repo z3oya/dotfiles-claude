@@ -27,12 +27,11 @@ if not session_id:
 
 cwd = str(hook_input.get("cwd") or "")
 
-# Build a netloc the user's local machine can ssh back to: prefer the server IP
+# Build a netloc the user's local machine can ssh back to: use the server IP
 # the SSH client used to reach us (from SSH_CONNECTION), with our own username.
 # When Claude runs on localhost (no SSH) or under loopback SSH (127.*, ::1) —
 # i.e. the user is already on the same box — leave host empty so the URL is the
-# hostless `file:///path` form and the local handler opens it directly without a
-# redundant scp round-trip.
+# hostless `file:///path` form and the local handler opens the file locally.
 host = ""
 ssh = os.environ.get("SSH_CONNECTION") or ""
 if ssh:

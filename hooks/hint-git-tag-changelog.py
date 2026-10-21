@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """PreToolUse hook (Bash + PowerShell): denies the session's first tag-creating
 git tag with a Keep a Changelog reminder, so CHANGELOG.md gets updated before a
-release is tagged; the retry passes silently. Listing and delete forms (bare
-git tag, -l, -d, ...) do not trigger."""
+release is tagged; the retry passes. Listing and delete forms (bare
+git tag, -l, -d, ...) are exempt."""
 
 import os
 import sys

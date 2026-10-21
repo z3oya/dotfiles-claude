@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""PreToolUse hook: AskUserQuestion accepts multiple questions per call, but
-one-at-a-time questioning produces much better answers. Python port of
-no-multi-question.sh — denies any call with more than one question."""
+"""PreToolUse hook: AskUserQuestion accepts multiple questions per call; this
+hook denies any call with more than one question. Python port of
+no-multi-question.sh."""
 
 import sys
 from pathlib import Path

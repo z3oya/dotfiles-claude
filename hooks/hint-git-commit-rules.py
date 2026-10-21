@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """PreToolUse hook (Bash + PowerShell): denies the session's first
 `git commit -m/--message` with a COMMIT_RULES reminder, so the rules land
-before any commit is accepted; the retry passes silently. Bare `git commit`
-(editor flow) does not trigger."""
+before any commit is accepted; the retry passes. Bare `git commit`
+(editor flow) is exempt."""
 
 import os
 import sys

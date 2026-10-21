@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """UserPromptSubmit hook: inject system-load context only when resources are
-actually elevated; silent on idle/normal systems. Reminds the agent to be
-careful before launching heavy work (builds, training, parallel agents,
-babysit jobs) when the box is already loaded. Python port of
-inject-system-load.sh — Linux-only: silent when platform.system() != "Linux"
-(relies on /proc/loadavg, /proc/meminfo, GNU nproc/ps; stay silent rather than
-emit garbage or abort).
+actually elevated. Reminds the agent to review load before launching heavy
+work (builds, training, parallel agents, babysit jobs) when the box is
+already loaded. Python port of inject-system-load.sh — Linux-only: exits with
+no output when platform.system() != "Linux" or when /proc/loadavg,
+/proc/meminfo, GNU nproc/ps are unavailable.
 
 Cooldown: time-based, per session_id, anchored to the last emit. Thresholds
 are env-overridable (also lets tests force trip/silent paths):

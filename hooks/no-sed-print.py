@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""PreToolUse hook (Bash + PowerShell): use Read tool with offset/limit instead
-of `sed -n 'Np' file` / `sed -n 'N,Mp' file`. Python port of no-sed-print.sh /
-no-sed-print.ps1."""
+"""PreToolUse hook (Bash + PowerShell): route `sed -n 'Np' file` /
+`sed -n 'N,Mp' file` to the Read tool with offset/limit. Python port of
+no-sed-print.sh / no-sed-print.ps1."""
 
 import re
 import sys
@@ -13,7 +13,7 @@ import hooklib
 hook_input, command = hooklib.read_hook_command()
 hooklib.exit_if_bypass(command, "BYPASS_SED_PRINT_CHECK")
 
-# Skip when sudo precedes sed — Read cannot substitute elevated reads.
+# Skip when sudo precedes sed — elevated reads keep the shell's privileges.
 if re.search(r"\bsudo[ \t]+[^;&|\r\n]*?\bsed\b", command):
     sys.exit(0)
 

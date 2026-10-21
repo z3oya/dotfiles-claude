@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """PreToolUse hook (Bash + PowerShell): block destructive git operations that
-can silently destroy work. Python port of no-destructive-git.sh /
+destroy work without prompting. Python port of no-destructive-git.sh /
 no-destructive-git.ps1. Each check carries its own bypass marker so unrelated
 chained commands don't silence each other."""
 
@@ -63,4 +63,14 @@ if A(ANCHORS + r"git\s+rm\b[^|;&]*\s(-[a-zA-Z]*f[a-zA-Z]*|--force)\b") \
         "committed version).\n"
         "Plain `git rm <file>` refuses uncommitted changes (safe). If you intend to discard those "
         "modifications, commit / stash them first, then `git rm`.")
+    sys.exit(0)
+
+# git stash — pop conflicts and drop/clear discard diffs irreversibly. The
+# permission layer denies the bare form; this adds wrapper forms
+# (bash -c / eval / xargs / ssh / ...).
+if A(ANCHORS + r"git\s+stash\b") and not hooklib.test_bypass_marker(command, "BYPASS_STASH_CHECK"):
+    hooklib.emit_pre_tool_deny_bypassable("BYPASS_STASH_CHECK",
+        "Do not use git stash. Stash pop conflicts and stash drop/clear discard changes with "
+        "no recovery path. Commit or branch instead; `git stash list` / `show` are read-only "
+        "— bypass with `# BYPASS_STASH_CHECK` for those.")
     sys.exit(0)

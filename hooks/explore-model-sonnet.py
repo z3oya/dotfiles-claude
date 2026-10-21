@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PreToolUse hook: silently default model "sonnet" for research subagents
+"""PreToolUse hook: default model "sonnet" for research subagents
 (Explore, claude-code-guide) when the caller omits a model — but only when the
 calling (main) agent is itself running on opus, so Sonnet/Haiku parents are
 left alone (no haiku → sonnet downgrade). Python port of explore-model-sonnet.sh."""

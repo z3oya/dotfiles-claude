@@ -14,8 +14,8 @@ import hooklib
 hooklib.read_hook_input()
 sid = hooklib.get_session_id()
 
-# Skip if not inside a git repo. timeout=3 so a hung git degrades to silence
-# instead of eating the whole 5s hook budget on every prompt.
+# Skip if not inside a git repo. timeout=3 keeps a hung git within the 5s
+# hook budget.
 try:
     probe = subprocess.run(
         ["git", "rev-parse", "--is-inside-work-tree"],

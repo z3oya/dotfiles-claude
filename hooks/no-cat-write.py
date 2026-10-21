@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""PreToolUse hook (Bash + PowerShell): use Write tool instead of cat-heredoc
-file writes (reachable via bash -c or Git Bash cat.exe). Python port of
+"""PreToolUse hook (Bash + PowerShell): route cat-heredoc file writes
+(reachable via bash -c or Git Bash cat.exe) to the Write tool. Python port of
 no-cat-write.sh / no-cat-write.ps1."""
 
 import re
@@ -24,7 +24,7 @@ if not cat_heredoc.search(command) or not cat_redirect.search(command):
 if re.search(r"\bgit\s+commit\b", command):
     sys.exit(0)
 
-# Skip when sudo precedes cat — Write cannot substitute elevated writes.
+# Skip when sudo precedes cat — elevated writes keep the shell's privileges.
 if re.search(r"\bsudo[ \t]+[^;&|\r\n]*?\bcat\b", command):
     sys.exit(0)
 

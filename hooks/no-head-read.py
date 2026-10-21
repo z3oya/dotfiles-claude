@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""PreToolUse hook (Bash + PowerShell): use Read tool with limit instead of
-`head -N file`. Python port of no-head-read.sh / no-head-read.ps1."""
+"""PreToolUse hook (Bash + PowerShell): route `head -N file` to the Read
+tool with limit. Python port of no-head-read.sh / no-head-read.ps1."""
 
 import re
 import sys
@@ -12,8 +12,7 @@ import hooklib
 hook_input, command = hooklib.read_hook_command()
 hooklib.exit_if_bypass(command, "BYPASS_HEAD_READ_CHECK")
 
-# Skip when sudo precedes head — Read runs without elevated privileges so
-# cannot substitute for `sudo head -3 /etc/shadow`.
+# Skip when sudo precedes head — elevated reads keep the shell's privileges.
 if re.search(r"\bsudo[ \t]+[^;&|\r\n]*?\bhead\b", command):
     sys.exit(0)
 

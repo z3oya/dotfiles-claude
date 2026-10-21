@@ -14,7 +14,7 @@ import hooklib
 hook_input, command = hooklib.read_hook_command()
 
 # Fast-path bailout: union of trigger tokens across all checks below —
-# false negatives would silently disarm, so keep it a superset.
+# false negatives leave the checks below disarmed; keep it a superset.
 FASTPATH = re.compile(
     r"\b(mkfs|parted|fdisk|gdisk|sgdisk|cfdisk|wipefs|cryptsetup|shred|srm|wipe"
     r"|shutdown|reboot|poweroff|halt|init|telinit|systemctl|chmod|chown|docker"

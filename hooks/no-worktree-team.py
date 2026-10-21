@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""PreToolUse hook: block isolation="worktree" combined with team_name —
-silently broken (GitHub #33045). Python port of no-worktree-team.sh.
+"""PreToolUse hook: block isolation="worktree" combined with team_name, which
+fails without an error (GitHub #33045). Python port of no-worktree-team.sh.
 Workaround: pre-create worktrees, tell teammates to EnterWorktree(path:)."""
 
 import sys
