@@ -16,9 +16,9 @@
     "DISABLE_AUTOUPDATER": "1",
     "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1",
     "IS_DEMO": "1",
-    "USER_HOOKS_PREFER_TVLY": "1",
     "USER_HOOKS_HINT_GIT_COMMIT_RULES": "1",
     "USER_HOOKS_HINT_GIT_TAG_CHANGELOG": "1",
+    "USER_HOOKS_WEB_TOOL_USE_DEEPSEEK": "1",
     "USER_HOOKS_ASK_GIT_COMMIT": "1"
   },
   "attribution": {
@@ -335,6 +335,17 @@
           {
             "type": "command",
             "command": "uv run ~/.claude/hooks/hint-git-tag-changelog.py",
+            "shell": "bash",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run ~/.claude/hooks/deny-native-web.py",
             "shell": "bash",
             "timeout": 5
           }

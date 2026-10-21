@@ -96,6 +96,11 @@ def is_explicit_background(value) -> bool:
     return value is True or str(value or "").lower() == "true"
 
 
+def env_flag_on(name: str) -> bool:
+    """Opt-in env switch: on = {1,true,on,yes}, off = anything else."""
+    return os.environ.get(name, "").strip().lower() in {"1", "true", "on", "yes"}
+
+
 # ---------- bypass ----------
 
 def test_bypass_marker(command: str, marker: str) -> bool:

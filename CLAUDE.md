@@ -7,7 +7,6 @@ Modern CLI tools available:
 - `rg` not `grep` · `fd` not `find` · `eza` not `ls`
 - `just` not `make` · `uv` not `pip` · `uv run` not `python3`
 - `sqlite3` · `hyperfine` · `rsync` · `gh`
-- Prioritize using `tvly --json` over 'Web Search'.
 
 Python: `uv`, `ruff`, `basedpyright`. Run one-off scripts with `uv run --with [deps]`. Run tools with `uvx`. Avoid polluting system python with raw `pip`.
 

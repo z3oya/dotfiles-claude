@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """PostToolUse hook (WebSearch): hint WebSearch → tvly search. prefer-* series;
-fires on every matching call (message is two short lines, no quota)."""
+fires only while USER_HOOKS_WEB_TOOL_USE_TVLY is on ({1,true,on,yes}), so the
+tvly hint and the ds-web deny hook never steer at the same time."""
 
 import os
 import shutil
@@ -10,8 +11,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / "lib" / "py"))
 import hooklib
 
-# switch: USER_HOOKS_PREFER_TVLY, off = {0,false,off,no}.
-if os.environ.get("USER_HOOKS_PREFER_TVLY", "").strip().lower() in {"0", "false", "off", "no"}:
+# switch: USER_HOOKS_WEB_TOOL_USE_TVLY, on = {1,true,on,yes}.
+if not hooklib.env_flag_on("USER_HOOKS_WEB_TOOL_USE_TVLY"):
     sys.exit(0)
 
 MESSAGE = ("Prefer tvly search instead of WebSearch.\n"
